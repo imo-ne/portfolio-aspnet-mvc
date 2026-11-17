@@ -1,0 +1,46 @@
+﻿@model List<Web_IB.Models.ProfilIndexViewModel>
+
+<h2 class="mb-4">Profils</h2>
+
+<div class="profil-list">
+    @foreach (var p in Model)
+    {
+        <div class="profile-card">
+
+            <div class="profil-card shadow-sm">
+                <div class="profil-photo">
+                    @if (!string.IsNullOrWhiteSpace(p.Photo))
+                    {
+                        <img src="@p.Photo" alt="Photo de @p.NomComplet" />
+                    }
+                    else
+                    {
+                        <div class="profil-photo-placeholder">
+                            @(!string.IsNullOrWhiteSpace(p.NomComplet) ? p.NomComplet.Substring(0, 1).ToUpper() : "?")
+                        </div>
+                    }
+                </div>
+
+                <div class="profil-content">
+                    <div class="profil-header">
+                        <div>
+                            <div class="profil-name">@p.NomComplet</div>
+                            @if (!string.IsNullOrWhiteSpace(p.Bio))
+                            {
+                                <div class="profil-bio">@p.Bio</div>
+                            }
+                        </div>
+
+                        <div class="profil-actions">
+                            <a asp-controller="Messages" asp-action="Send" asp-route-toId="@p.Id"
+                               class="btn btn-outline-secondary btn-sm">Message</a>
+                            <a asp-controller="Profil" asp-action="Details" asp-route-id="@p.Id"
+                               class="btn btn-primary btn-sm">Explore</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

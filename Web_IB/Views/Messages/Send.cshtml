@@ -1,0 +1,24 @@
+﻿@model Web_IB.Models.SendMessageViewModel
+
+<h2 class="mb-3">Send message</h2>
+
+<div class="mb-2 text-muted">To: <strong>@Model.DestinataireNom</strong></div>
+
+<form asp-action="Send" method="post">
+    <input type="hidden" asp-for="DestinataireId" />
+    <input type="hidden" asp-for="DestinataireNom" />
+
+    <div class="mb-2">
+        <textarea asp-for="Contenu" class="form-control" rows="4" placeholder="Write your message..."></textarea>
+        <span asp-validation-for="Contenu" class="text-danger"></span>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Send</button>
+    <a class="btn btn-outline-secondary" asp-action="Index">Cancel</a>
+
+    <div asp-validation-summary="ModelOnly" class="text-danger mt-2"></div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

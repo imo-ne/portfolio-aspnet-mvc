@@ -1,0 +1,75 @@
+﻿@model List<Web_IB.Entities.Projet>
+
+<h2 class="mb-3">Manage Projects</h2>
+<a class="btn btn-link mb-3" asp-controller="Portfolio" asp-action="Index">← Back to My Portfolio</a>
+
+<div class="card mb-3">
+    <div class="card-header"><strong>Add project</strong></div>
+    <div class="card-body">
+        <form asp-controller="Projects" asp-action="Create" method="post" class="row g-2">
+            <div class="col-md-4">
+                <input name="titre" class="form-control" placeholder="Title (ex: Portfolio ASP.NET)" />
+            </div>
+            <div class="col-md-4">
+                <input name="lien" class="form-control" placeholder="Link (GitHub / Demo) - optional" />
+            </div>
+            <div class="col-md-4">
+                <input name="description" class="form-control" placeholder="Short description - optional" />
+            </div>
+            <div class="col-12">
+                <button class="btn btn-primary" type="submit">Add</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header"><strong>Your projects</strong></div>
+    <div class="card-body">
+        @if (Model.Count == 0)
+        {
+            <div class="text-muted">No projects yet.</div>
+        }
+        else
+        {
+            @foreach (var p in Model)
+            {
+                <div class="border rounded p-2 mb-2">
+                    <div class="row g-2 align-items-end">
+
+                        <!-- UPDATE FORM (alone) -->
+                        <form asp-controller="Projects" asp-action="Update" method="post" class="col-md-10 row g-2">
+                            <input type="hidden" name="id" value="@p.Id" />
+
+                            <div class="col-md-4">
+                                <label class="form-label">Title</label>
+                                <input class="form-control" name="titre" value="@p.Titre" />
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Link</label>
+                                <input class="form-control" name="lien" value="@p.Lien" />
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Description</label>
+                                <input class="form-control" name="description" value="@p.Description" />
+                            </div>
+
+                            <div class="col-12">
+                                <button class="btn btn-outline-success" type="submit">Save</button>
+                            </div>
+                        </form>
+
+                        <!-- DELETE FORM (separate) -->
+                        <form asp-controller="Projects" asp-action="Delete" method="post" class="col-md-2">
+                            <input type="hidden" name="id" value="@p.Id" />
+                            <button class="btn btn-outline-danger w-100" type="submit">Delete</button>
+                        </form>
+
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

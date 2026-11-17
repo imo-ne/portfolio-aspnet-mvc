@@ -1,0 +1,88 @@
+﻿@model Web_IB.Models.PortfolioViewModel
+
+<h2 class="mb-4">My Portfolio</h2>
+
+<div class="row g-3">
+
+    <!-- Skills -->
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <strong>Skills</strong>
+                <a class="btn btn-sm btn-outline-primary" asp-controller="Skills" asp-action="Index">Update</a>
+            </div>
+            <div class="card-body">
+                @if (Model.Skills.Count == 0)
+                {
+                    <div class="text-muted">No skills yet.</div>
+                }
+                else
+                {
+                    <ul class="mb-0">
+                        @foreach (var s in Model.Skills)
+                        {
+                            <li>@s.Nom @if(!string.IsNullOrEmpty(s.Niveau)){
+                            <span class="text-muted">(@s.Niveau)</span>
+                        }
+    </li>
+                    }
+                </ul>
+                                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Projects -->
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <strong>Projects</strong>
+                <a class="btn btn-sm btn-outline-primary" asp-controller="Projects" asp-action="Index">Update</a>
+            </div>
+            <div class="card-body">
+                @if (Model.Projects.Count == 0)
+                {
+                    <div class="text-muted">No projects yet.</div>
+                }
+                else
+                {
+                    @foreach (var p in Model.Projects)
+                    {
+                        <div class="mb-2">
+                            <div class="fw-bold">@p.Titre</div>
+                            <div class="text-muted">@p.Description</div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Experience -->
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <strong>Experience</strong>
+                <a class="btn btn-sm btn-outline-primary" asp-controller="Experiences" asp-action="Index">Update</a>
+            </div>
+            <div class="card-body">
+                @if (Model.Experiences.Count == 0)
+                {
+                    <div class="text-muted">No experiences yet.</div>
+                }
+                else
+                {
+                    @foreach (var e in Model.Experiences)
+                    {
+                        <div class="mb-2">
+                            <div class="fw-bold">@e.Poste - @e.Entreprise</div>
+                            <div class="text-muted">@e.Periode</div>
+                            <div>@e.Description</div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,28 @@
+# Build output
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Ll]ogs/
+
+# Visual Studio / editors
+.vs/
+.idea/
+.vscode/
+*.user
+*.suo
+*.userosscache
+
+# Secrets & local databases
+*.env
+secrets.json
+appsettings.*.local.json
+*.mdf
+*.ldf
+*.db
+
+# Windows
+Thumbs.db
+Desktop.ini

@@ -1,0 +1,112 @@
+﻿@model Web_IB.Models.ExploreProfileViewModel
+
+<!-- PROFILE HEADER -->
+<div class="card mb-3">
+    <div class="card-body d-flex gap-3 align-items-start">
+        <div style="width:110px;height:110px;border-radius:12px;overflow:hidden;background:#f1f3f5;">
+            @if (!string.IsNullOrWhiteSpace(Model.Profil.Photo))
+            {
+                <img src="@Model.Profil.Photo" style="width:100%;height:100%;object-fit:cover;" />
+            }
+        </div>
+
+        <div class="flex-grow-1">
+            <h3 class="mb-1">@Model.Profil.NomComplet</h3>
+            <p class="text-muted mb-2">@Model.Profil.Bio</p>
+
+            <div class="d-flex gap-2 flex-wrap">
+                @if (!string.IsNullOrWhiteSpace(Model.Profil.LinkedIn))
+                {
+                    <a class="btn btn-outline-primary btn-sm" href="@Model.Profil.LinkedIn" target="_blank">LinkedIn</a>
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.Profil.GitHub))
+                {
+                    <a class="btn btn-outline-dark btn-sm" href="@Model.Profil.GitHub" target="_blank">GitHub</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3">
+
+    <!-- SKILLS -->
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header"><strong>Skills</strong></div>
+            <div class="card-body">
+                @if (Model.Portfolio.Skills.Count == 0)
+                {
+                    <div class="text-muted">No skills added.</div>
+                }
+                else
+                {
+                    <div class="d-flex flex-wrap gap-2">
+                        @foreach (var s in Model.Portfolio.Skills)
+                        {
+                            <span class="badge bg-light text-dark border">
+                                @s.Nom
+                                @if (!string.IsNullOrWhiteSpace(s.Niveau))
+                                {
+                                    <span class="text-muted">(@s.Niveau)</span>
+                                }
+                            </span>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header"><strong>Projects</strong></div>
+            <div class="card-body">
+                @if (Model.Portfolio.Projects.Count == 0)
+                {
+                    <div class="text-muted">No projects added.</div>
+                }
+                else
+                {
+                    @foreach (var p in Model.Portfolio.Projects)
+                    {
+                        <div class="mb-3">
+                            <div class="fw-bold">@p.Titre</div>
+                            <div class="text-muted">@p.Description</div>
+                            @if (!string.IsNullOrWhiteSpace(p.Lien))
+                            {
+                                <a href="@p.Lien" target="_blank">@p.Lien</a>
+                            }
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header"><strong>Experience</strong></div>
+            <div class="card-body">
+                @if (Model.Portfolio.Experiences.Count == 0)
+                {
+                    <div class="text-muted">No experiences added.</div>
+                }
+                else
+                {
+                    @foreach (var e in Model.Portfolio.Experiences)
+                    {
+                        <div class="mb-3">
+                            <div class="fw-bold">@e.Poste - @e.Entreprise</div>
+                            <div class="text-muted">@e.Periode</div>
+                            <div>@e.Description</div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
